@@ -1,15 +1,11 @@
 from tkinter import *
 import json
+from seats import Seat, Show
 
 root=Tk()
 top=Toplevel()
 top.title('LOGIN')
 root.title('MOVIE MANIA SEAT LAYOUT')
-
-
-with open ('matrix.json') as file:
-    matrix=json.load(file)
-       
 
 label_user=Label(top,text="USERNAME").place(x=40,y=60)
 username=StringVar()
@@ -33,40 +29,48 @@ username1=StringVar()
 username1_box=Entry(root,textvariable=username1,font=('Times', 12,'bold'), highlightcolor = 'green', highlightbackground='brown', bg='#FFEFE7')
 username1_box.grid(columnspan=5)
 
-booked_seats = []
-def create_button(row, column):
-    btn = Button(root, text=chr(row+65)+str(column),font =('calibri', 10, 'bold'),bd='5')
-    btn.configure(padx=10, pady=10)
+show = Show(
+    name = "Avatar",
+    director = 'James Cameron',
+    imdb_rating = 7.8,
+    timing = '11:00PM',
+    screen_no = 4,
+    no_of_rows = 5,
+    no_of_columns = 5,
+    file_name = 'avatar.json'
+)
 
-    if matrix[str(row)][column]:
-        btn.configure(bg='red')
-
-    btn.configure(command=lambda button=btn: book(button))
-    btn.grid(column=column, row=row+1)
-    return btn
-
-def book(button):
-    for row in matrix:
-        for column in range(len(matrix[row])):
-            if button == buttons[int(row)][column]:
-                booked_seats.append((row, column))
+def get_matrix(show:Show):
+    with open(show.file_name, 'r') as file:
+        matrix = json.load(file)
+    # matrix = [[0]*show.no_of_columns for _ in range(show.no_of_rows)]
+    return matrix
+def update_seat_matrix(show:Show):
+    matrix = get_matrix(show)
+    with open(show.file_name, 'w') as output:
+        with open('selected_seats.txt', 'r') as input:
+            for seat_str in input.readlines():
+                row, column = int(seat_str[0]), int(seat_str[1])
                 matrix[row][column] = 1
-    button.config(bg='green')
+        json.dump(matrix, output)
 
-    
-buttons = []
-for _ in range(len(matrix)):
-    buttons.append([])
-for row in matrix:
-    for column in range(len(matrix[row])):
-        buttons[int(row)].append(create_button(int(row), int(column)))
+matrix = get_matrix(show)
+for row in range(show.no_of_rows):
+    for column in range(show.no_of_columns):
+
+        seat = Seat(root, row, column, matrix[row][column])
+        seat.grid(row=row, column=column)
 
 def submit():
-    with open('matrix.json', 'w') as file:
-        file.write(json.dumps(matrix, indent=4))
+    update_seat_matrix(show)
     
-    print(username.get(), "booked the following seats")
-    print(booked_seats)
+    print(username.get(), "booked the following seats:-")
+    with open('selected_seats.txt', 'r') as file:
+        print(file.readlines())
+
+    # empty the file for next use
+    with open('selected_seats.txt', 'w') as file:
+        file.write("")
 
 submit_button = Button(root, text="Submit", command=submit,font =('calibri', 10, 'bold'),bd='5')
 submit_button.grid(column=5, row=0)
