@@ -39,4 +39,4 @@ def create_button_matrix(root:Tk, show:Show) -> None:
         for column in range(show.no_of_columns):
 
             seat = Seat(root, row, column, matrix[row][column])
-            seat.grid(row=row, column=column)
+            seat.grid(row=row+1, column=column)
