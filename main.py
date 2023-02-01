@@ -1,6 +1,7 @@
-from tkinter import *
-import json
-from seats import Seat, Show
+from tkinter import Tk, Toplevel, Button, Label, StringVar, Entry
+from matrix import create_button_matrix
+from seats import Show
+from submit import submit
 
 root=Tk()
 top=Toplevel()
@@ -40,39 +41,15 @@ show = Show(
     file_name = 'avatar.json'
 )
 
-def get_matrix(show:Show):
-    with open(show.file_name, 'r') as file:
-        matrix = json.load(file)
-    # matrix = [[0]*show.no_of_columns for _ in range(show.no_of_rows)]
-    return matrix
-def update_seat_matrix(show:Show):
-    matrix = get_matrix(show)
-    with open(show.file_name, 'w') as output:
-        with open('selected_seats.txt', 'r') as input:
-            for seat_str in input.readlines():
-                row, column = int(seat_str[0]), int(seat_str[1])
-                matrix[row][column] = 1
-        json.dump(matrix, output)
+create_button_matrix(root, show)
 
-matrix = get_matrix(show)
-for row in range(show.no_of_rows):
-    for column in range(show.no_of_columns):
-
-        seat = Seat(root, row, column, matrix[row][column])
-        seat.grid(row=row, column=column)
-
-def submit():
-    update_seat_matrix(show)
-    
-    print(username.get(), "booked the following seats:-")
-    with open('selected_seats.txt', 'r') as file:
-        print(file.readlines())
-
-    # empty the file for next use
-    with open('selected_seats.txt', 'w') as file:
-        file.write("")
-
-submit_button = Button(root, text="Submit", command=submit,font =('calibri', 10, 'bold'),bd='5')
+submit_button = Button(
+    root,
+    text="Submit",
+    command=lambda: submit(show, username.get()),
+    font=('calibri', 10, 'bold'),
+    bd='5'
+)
 submit_button.grid(column=5, row=0)
 
 root.mainloop()
