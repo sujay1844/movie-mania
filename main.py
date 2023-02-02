@@ -57,7 +57,7 @@ show_avatar = Show(
 avatar_img=ImageTk.PhotoImage(Image.open("avatar1.png"))
 avatar_lbl=Label(page2,image=avatar_img)
 avatar_lbl.place(x=50,y=200)
-avatar_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=100,y=550)
+avatar_book_btn=Button(page2,text="Book Now",command=lambda: book_now(show_avatar), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=100,y=550)
 
 show_pathaan = Show(
     name='Pathaan',
@@ -72,7 +72,7 @@ show_pathaan = Show(
 pathaan_img=ImageTk.PhotoImage(Image.open("pathaan1.png"))
 pathaan_lbl=Label(page2,image=pathaan_img)
 pathaan_lbl.place(x=450,y=200)
-pathaan_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=500,y=550)
+pathaan_book_btn=Button(page2,text="Book Now",command=lambda: book_now(show_pathaan), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=500,y=550)
 
 show_varisu = Show(
     name='Varisu',
@@ -87,22 +87,22 @@ show_varisu = Show(
 varisu_img=ImageTk.PhotoImage(Image.open("varisu1.png"))
 varisu_lbl=Label(page2,image=varisu_img)
 varisu_lbl.place(x=850,y=200)
-varisu_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=900,y=550)
+varisu_book_btn=Button(page2,text="Book Now",command=lambda: book_now(show_varisu), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=900,y=550)
 
 show_kantara = Show(
-    name='Avatar',
-    director='James Cameron',
-    imdb_rating=7.8,
-    timing='11:00PM',
-    screen_no=4,
-    no_of_rows=5,
-    no_of_columns=5,
-    file_name='avatar.json'
+    name='Kantara',
+    director='Rishab Shetty',
+    imdb_rating=8.4,
+    timing='1:00PM',
+    screen_no=1,
+    no_of_rows=4,
+    no_of_columns=6,
+    file_name='kantara.json'
 )
 kantara_img=ImageTk.PhotoImage(Image.open("kantara1.png"))
 kantara_lbl=Label(page2,image=kantara_img)
 kantara_lbl.place(x=1250,y=200)
-kantara_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=1300,y=550)
+kantara_book_btn=Button(page2,text="Book Now",command=lambda: book_now(show_kantara), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=1300,y=550)
 
 pag2_nxt_button=Button(page2, text="NEXT",  bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5', command=lambda: show_frame(page3)).place(x=1400,y=700)
 pag2_bk_button=Button(page2, text="BACK",  bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5', command=lambda: show_frame(page1)).place(x=50,y=700)
@@ -113,18 +113,19 @@ pag2_bk_button=Button(page2, text="BACK",  bg="#FF3399", fg="#FFFFFF", font=("Ar
 pag3_label = Label(page3,text="SEAT LAYOUT", font=('Arial', 30, 'bold'))
 pag3_label.grid(row=0,columnspan=5)
 
-create_button_matrix(page3, show_avatar)
-
-def seat_layout(root):
+def seat_layout(show:Show):
     submit_button = Button(
         page3,
         text="Submit",
-        command=lambda: submit(show_avatar, username.get(), root),
+        command=lambda: submit(show, username.get(), root),
         font=('calibri', 10, 'bold'),
         bd='5'
     )
     submit_button.grid(column=5, row=0)
 
-seat_layout(root)   
+def book_now(show:Show):
+    create_button_matrix(page3, show)
+    seat_layout(show)   
+    show_frame(page3)
 
 root.mainloop()

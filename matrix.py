@@ -25,7 +25,7 @@ def update_seat_matrix(show:Show) -> None:
 def create_matrix_file(show:Show) -> None:
 
     # Delete if already exists
-    if not os.path.exists(show.file_name):
+    if os.path.exists(show.file_name):
         os.remove(show.file_name)
 
     matrix = [[0]*show.no_of_columns for _ in range(show.no_of_rows)]
