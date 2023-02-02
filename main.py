@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 from PIL import ImageTk , Image
-from tkinter import Tk, Button, Label, StringVar, Entry
-=======
-from tkinter import Tk, Toplevel, Button, Label, StringVar, Entry, Frame
->>>>>>> qrcode
+from tkinter import Tk, Button, Label, StringVar, Entry, Frame
 from matrix import create_button_matrix
 from movie import Show, create_show
 from submit import submit
@@ -71,14 +67,24 @@ kantara_movie=Label(page2,image=kantara)
 kantara_movie.place(x=1250,y=200)
 kantara_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=1300,y=550)
 
-pag2_nxt_button=Button(page2, text="NEXT",  bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5', command=lambda: show_frame(page3)).place(x=1400,y=700)
-pag2_bk_button=Button(page2, text="BACK",  bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5', command=lambda: show_frame(page1)).place(x=50,y=700)
+next_button=Image.open("nextbtn.png")
+resize_next_button=next_button.resize((50,50))
+next_btn=ImageTk.PhotoImage(resize_next_button)
+pag2_nxt_button=Button(page2,text='Next', command=lambda: show_frame(page3) , bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=1400,y=50)
+
+back_button=Image.open("backbtn.png")
+resize_back_button=back_button.resize((50,50))
+back_btn=ImageTk.PhotoImage(resize_back_button)
+pag2_bk_button=Button(page2,text='back', command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=50,y=50)
+
+
 
 
 #========page3============
 
-pag3_label = Label(page3,text="SEAT LAYOUT", font=('Arial', 30, 'bold'))
-pag3_label.grid(row=0,columnspan=5)
+page3.configure(bg='#333333')
+pag3_label = Label(page3,text="SEAT LAYOUT", bg='#333333', fg="#FF3399", font=("Cooper Black", 35)).place(x=500,y=100)
+
 
 
 show_avatar = Show(
@@ -92,18 +98,36 @@ show_avatar = Show(
     file_name = 'avatar.json'
 )
 
-create_button_matrix(page3, show)
+create_button_matrix(page3, show_avatar)
 
 def seat_layout():
     submit_button = Button(
-        root,
+        page3,
         text="Submit",
         command=lambda: submit(show, username.get()),
-        font=('calibri', 10, 'bold'),
-        bd='5'
-    )
-    submit_button.grid(column=5, row=0)
+        bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place( x=700,y=100)
+    
+    
 
-seat_layout(page4)   
+seat_layout()
+
+next_button1=Image.open("nextbtn.png")
+resize_next_button1=next_button1.resize((50,50))
+next_btn1=ImageTk.PhotoImage(resize_next_button1)
+pag2_nxt_button1=Button(page3,text='Next', command=lambda: show_frame(page4), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=1400,y=50)
+
+back_button1=Image.open("backbtn.png")
+resize_back_button1=back_button1.resize((50,50))
+back_btn1=ImageTk.PhotoImage(resize_back_button1)
+pag2_bk_button1=Button(page3,text='Back', command=lambda: show_frame(page4),bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=50,y=50)
+
+#==========page4===========
+
+page4.configure(bg='#333333')
+pag4_label = Label(page4,text='Hey Sri', bg='#333333', fg="#FF3399", font=("Arial Black", 35)).place(x=50,y=100)
+thanku_label = Label(page4,text='Thank you for booking , Here are your details', bg='#333333', fg="#FF3399", font=("Arial Black", 25)).place(x=400,y=200)
+
+pg4_label1=Label(page4,text='Name : Sri', bg='#333333', fg="#FF3399", font=("Arial Black", 20)).place(x=450,y=300)
+
 
 root.mainloop()
