@@ -1,6 +1,6 @@
 import json
 from json.decoder import JSONDecodeError
-from tkinter import Button, Tk
+from tkinter import Button, Frame, Tk
 from dataclasses import dataclass
 
 @dataclass
@@ -18,7 +18,7 @@ class Show:
 
 class Seat(Button):
 
-    def __init__(self, root:Tk, row:int, column:int, status:int) -> None:
+    def __init__(self, root:Tk | Frame, row:int, column:int, status:int) -> None:
         self.row = row
         self.column = column
         self.status = status
@@ -41,8 +41,6 @@ class Seat(Button):
         # If the seat is booked, ignore the button click
         if self.status: return
 
-        self.configure(bg='green')
-
         # Since list of booked seats is common to all buttons, storing it in a file is better than a variable
         try:
             with open('selected_seats.json', 'r') as file:
@@ -50,7 +48,14 @@ class Seat(Button):
         except (JSONDecodeError, FileNotFoundError):
             selected_seats = []
 
-        selected_seats.append([self.row, self.column])
+        coords = [self.row, self.column]
+        if coords in selected_seats:
+            selected_seats.remove(coords)
+            self.configure(bg='white')
+        else:
+            selected_seats.append(coords)
+            self.configure(bg='green')
 
         with open('selected_seats.json', 'w') as file:
             json.dump(selected_seats, file)
+
