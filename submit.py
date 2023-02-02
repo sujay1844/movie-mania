@@ -1,21 +1,12 @@
 import json
-import os
 from matrix import update_seat_matrix
 from dataclasses import asdict
 from movie import Show
 from json.decoder import JSONDecodeError
-from tkinter import BOTTOM, CENTER, Button, Frame, BitmapImage, Label, PhotoImage
+from tkinter import Button, Frame, Label
 from movie import Show
-import pyqrcode
-import PIL
-from PIL import Image, ImageTk
-from tkinter import Tk
 
-def submit(show:Show, username:str, root:Tk):
-    for widget in root.winfo_children():
-        widget.destroy()
-    frame = Frame(root)
-    frame.pack()
+def submit(show:Show, username:str, frame:Frame):
     update_seat_matrix(show)
     
     with open('selected_seats.json', 'r') as file:
@@ -29,19 +20,11 @@ def submit(show:Show, username:str, root:Tk):
         'seats': seats
 
     })
-    generate_qr_code(info)
-    img = PhotoImage(file='ticket.png')
-    img_lbl=Label(frame,image=img, bg='red')
-    img_lbl.pack()
     Label(frame, text=info, wraplength=300).pack()
 
     Button(frame, text="Exit", command=exit).pack()
     frame.tkraise()
 
-def generate_qr_code(info):
-    qr = pyqrcode.create(info)
-    qr.png('ticket.png', scale=8)
-    # return fname
 def _empty() -> None:
     # empty the file for next use
     with open('selected_seats.json', 'w') as file:

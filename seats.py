@@ -1,6 +1,6 @@
 import json
 from json.decoder import JSONDecodeError
-from tkinter import Button, Tk
+from tkinter import Button, Frame, Tk
 from dataclasses import dataclass
 
 @dataclass
@@ -18,7 +18,7 @@ class Show:
 
 class Seat(Button):
 
-    def __init__(self, root:Tk, row:int, column:int, status:int) -> None:
+    def __init__(self, root:Tk | Frame, row:int, column:int, status:int) -> None:
         self.row = row
         self.column = column
         self.status = status

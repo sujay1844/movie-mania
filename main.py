@@ -1,7 +1,7 @@
 from PIL import ImageTk , Image
-from tkinter import Tk, Button, Label, StringVar, Entry, Frame
+from tkinter import CENTER, Tk, Button, Label, StringVar, Entry, Frame
 from matrix import create_button_matrix
-from movie import Show, create_show
+from movie import Show
 from submit import submit
 
 root=Tk()
@@ -13,14 +13,13 @@ root.columnconfigure(0,weight=1)
 page1=Frame(root)
 page2=Frame(root)
 page3=Frame(root)
-# page4=Frame(root)
+page4=Frame(root)
 
-for frame in (page1 , page2 , page3):
+for frame in (page1 , page2 , page3, page4):
     frame.grid(row=0, column=0, sticky='nsew')
 
 def show_frame(frame):
     frame.tkraise()
-
 
 show_frame(page1)
 
@@ -41,6 +40,37 @@ cancel_button=Button(page1,text="Cancel",command=root.destroy,bg="#FF3399", fg="
 
 
 #=========page2============
+pag3_label = Label(page3,text="SEAT LAYOUT", font=('Arial', 30, 'bold'))
+pag3_label.place(anchor=CENTER, relx=.5, rely=.1)
+def seat_layout(show:Show, frame:Frame):
+    submit_button = Button(
+        frame,
+        text="Submit",
+        command=lambda: submit(show, username.get(), page4),
+        font=('calibri', 10, 'bold'),
+        bd='5'
+    )
+    submit_button.grid(row=1, column=1)
+    details = Frame(frame, padx=100)
+
+    text = f"""
+    Name: {show.name}
+    Director: {show.director}
+    IMDb Rating: {show.imdb_rating}
+    Time: {show.timing}
+    Screen No: {show.screen_no}
+    """
+
+    lbl = Label(details,text=text, font=('calibri', 20, 'normal'))
+    lbl.grid(row=0, column=0)
+    details.grid(row=0, column=0, rowspan=2)
+
+
+def book_now(show:Show):
+    sub_frame = create_button_matrix(page3, show)
+    seat_layout(show, sub_frame)   
+    show_frame(page3)
+
 page2.configure(bg='#333333')
 pag2_label = Label(page2,text="SELECT YOUR MOVIE", bg='#333333', fg="#FF3399", font=("Cooper Black", 35)).place(x=500,y=100)
 
@@ -107,25 +137,7 @@ kantara_book_btn=Button(page2,text="Book Now",command=lambda: book_now(show_kant
 pag2_nxt_button=Button(page2, text="NEXT",  bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5', command=lambda: show_frame(page3)).place(x=1400,y=700)
 pag2_bk_button=Button(page2, text="BACK",  bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5', command=lambda: show_frame(page1)).place(x=50,y=700)
 
-
 #========page3============
 
-pag3_label = Label(page3,text="SEAT LAYOUT", font=('Arial', 30, 'bold'))
-pag3_label.grid(row=0,columnspan=5)
-
-def seat_layout(show:Show):
-    submit_button = Button(
-        page3,
-        text="Submit",
-        command=lambda: submit(show, username.get(), root),
-        font=('calibri', 10, 'bold'),
-        bd='5'
-    )
-    submit_button.grid(column=5, row=0)
-
-def book_now(show:Show):
-    create_button_matrix(page3, show)
-    seat_layout(show)   
-    show_frame(page3)
 
 root.mainloop()
