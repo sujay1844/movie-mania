@@ -18,12 +18,12 @@ def submit(show:Show, username:str, frame:Frame):
         save_tickets_to_user(show, username, seats)
 
     _empty()
-    info = json.dumps({
+    info = {
         'name': username,
         'show': asdict(show),
         'seats': seats
 
-    })
+    }
     info = "foo"
     generate_qr_code(info)
     img  = PhotoImage(file='./ticket.png')
