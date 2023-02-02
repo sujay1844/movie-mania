@@ -1,0 +1,6 @@
+- Add price beside seat layout
+- create show page
+- user account page
+- qr code generation
+- better ui
+- 
