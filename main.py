@@ -1,6 +1,6 @@
-from tkinter import Tk, Toplevel, Button, Label, StringVar, Entry
+from tkinter import Tk, Toplevel, Button, Label, StringVar, Entry, Frame
 from matrix import create_button_matrix
-from seats import Show
+from movie import Show, create_show
 from submit import submit
 
 root=Tk()
@@ -64,7 +64,7 @@ show = Show(
     file_name = 'avatar.json'
 )
 
-create_button_matrix(root, show)
+create_button_matrix(page3, show)
 
 def seat_layout():
     submit_button = Button(
@@ -76,6 +76,6 @@ def seat_layout():
     )
     submit_button.grid(column=5, row=0)
 
-seat_layout()   
+seat_layout(page4)   
 
 root.mainloop()
