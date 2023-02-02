@@ -1,25 +1,21 @@
-<<<<<<< HEAD
 from PIL import ImageTk , Image
-from tkinter import Tk, Button, Label, StringVar, Entry
-=======
-from tkinter import Tk, Toplevel, Button, Label, StringVar, Entry, Frame
->>>>>>> qrcode
+from tkinter import Tk, Button, Label, StringVar, Entry, Frame
 from matrix import create_button_matrix
 from movie import Show, create_show
 from submit import submit
 
 root=Tk()
 root.title('MOVIE MANIA')
-root.state('zoomed')
+# root.state('zoomed')
 root.rowconfigure(0,weight=1)
 root.columnconfigure(0,weight=1)
 
 page1=Frame(root)
 page2=Frame(root)
 page3=Frame(root)
-page4=Frame(root)
+# page4=Frame(root)
 
-for frame in (page1 , page2 , page3 , page4):
+for frame in (page1 , page2 , page3):
     frame.grid(row=0, column=0, sticky='nsew')
 
 def show_frame(frame):
@@ -45,30 +41,67 @@ cancel_button=Button(page1,text="Cancel",command=root.destroy,bg="#FF3399", fg="
 
 
 #=========page2============
-
 page2.configure(bg='#333333')
-
 pag2_label = Label(page2,text="SELECT YOUR MOVIE", bg='#333333', fg="#FF3399", font=("Cooper Black", 35)).place(x=500,y=100)
 
-
-avatar=ImageTk.PhotoImage( Image.open("avatar1.png"))
-avatar_movie=Label(page2,image=avatar)
-avatar_movie.place(x=50,y=200)
+show_avatar = Show(
+    name='Avatar',
+    director='James Cameron',
+    imdb_rating=7.8,
+    timing='11:00PM',
+    screen_no=4,
+    no_of_rows=5,
+    no_of_columns=5,
+    file_name='avatar.json'
+)
+avatar_img=ImageTk.PhotoImage(Image.open("avatar1.png"))
+avatar_lbl=Label(page2,image=avatar_img)
+avatar_lbl.place(x=50,y=200)
 avatar_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=100,y=550)
 
-pathaan=ImageTk.PhotoImage(Image.open("pathaan1.png"))
-pathaan_movie=Label(page2,image=pathaan)
-pathaan_movie.place(x=450,y=200)
+show_pathaan = Show(
+    name='Pathaan',
+    director='Siddarth Anand',
+    imdb_rating=7.5,
+    timing='4:00PM',
+    screen_no=3,
+    no_of_rows=6,
+    no_of_columns=5,
+    file_name='pathaan.json'
+)
+pathaan_img=ImageTk.PhotoImage(Image.open("pathaan1.png"))
+pathaan_lbl=Label(page2,image=pathaan_img)
+pathaan_lbl.place(x=450,y=200)
 pathaan_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=500,y=550)
 
-varisu=ImageTk.PhotoImage(Image.open("varisu1.png"))
-varisu_movie=Label(page2,image=varisu)
-varisu_movie.place(x=850,y=200)
+show_varisu = Show(
+    name='Varisu',
+    director='Vamshi Paidipally',
+    imdb_rating=6.8,
+    timing='7:00PM',
+    screen_no=4,
+    no_of_rows=5,
+    no_of_columns=7,
+    file_name='varisu.json'
+)
+varisu_img=ImageTk.PhotoImage(Image.open("varisu1.png"))
+varisu_lbl=Label(page2,image=varisu_img)
+varisu_lbl.place(x=850,y=200)
 varisu_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=900,y=550)
 
-kantara=ImageTk.PhotoImage(Image.open("kantara1.png"))
-kantara_movie=Label(page2,image=kantara)
-kantara_movie.place(x=1250,y=200)
+show_kantara = Show(
+    name='Avatar',
+    director='James Cameron',
+    imdb_rating=7.8,
+    timing='11:00PM',
+    screen_no=4,
+    no_of_rows=5,
+    no_of_columns=5,
+    file_name='avatar.json'
+)
+kantara_img=ImageTk.PhotoImage(Image.open("kantara1.png"))
+kantara_lbl=Label(page2,image=kantara_img)
+kantara_lbl.place(x=1250,y=200)
 kantara_book_btn=Button(page2,text="Book Now",command=lambda: show_frame(page3), bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5').place(x=1300,y=550)
 
 pag2_nxt_button=Button(page2, text="NEXT",  bg="#FF3399", fg="#FFFFFF", font=("Arial", 16),bd='5', command=lambda: show_frame(page3)).place(x=1400,y=700)
@@ -80,30 +113,18 @@ pag2_bk_button=Button(page2, text="BACK",  bg="#FF3399", fg="#FFFFFF", font=("Ar
 pag3_label = Label(page3,text="SEAT LAYOUT", font=('Arial', 30, 'bold'))
 pag3_label.grid(row=0,columnspan=5)
 
+create_button_matrix(page3, show_avatar)
 
-show_avatar = Show(
-    name = "Avatar",
-    director = 'James Cameron',
-    imdb_rating = 7.8,
-    timing = '11:00PM',
-    screen_no = 4,
-    no_of_rows = 5,
-    no_of_columns = 5,
-    file_name = 'avatar.json'
-)
-
-create_button_matrix(page3, show)
-
-def seat_layout():
+def seat_layout(root):
     submit_button = Button(
-        root,
+        page3,
         text="Submit",
-        command=lambda: submit(show, username.get()),
+        command=lambda: submit(show_avatar, username.get(), root),
         font=('calibri', 10, 'bold'),
         bd='5'
     )
     submit_button.grid(column=5, row=0)
 
-seat_layout(page4)   
+seat_layout(root)   
 
 root.mainloop()
