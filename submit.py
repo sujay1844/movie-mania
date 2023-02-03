@@ -51,7 +51,6 @@ def _empty() -> None:
         file.write("[]")
 
 def save_tickets_to_user(show:Show, username:str, seats:list) -> None:
-    print(show.name, username, seats)
     user = {
         'name': username,
         'history': [

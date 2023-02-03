@@ -655,5 +655,28 @@
                 ]
             }
         ]
+    },
+    "vklj": {
+        "name": "vklj",
+        "history": [
+            {
+                "show": {
+                    "name": "Pathaan",
+                    "director": "Siddarth Anand",
+                    "imdb_rating": 7.5,
+                    "timing": "4:00PM",
+                    "screen_no": 3,
+                    "no_of_rows": 6,
+                    "no_of_columns": 5,
+                    "file_name": "pathaan.json"
+                },
+                "seats": [
+                    [
+                        0,
+                        0
+                    ]
+                ]
+            }
+        ]
     }
 }

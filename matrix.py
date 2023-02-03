@@ -10,7 +10,6 @@ def get_matrix(show:Show) -> list:
         create_matrix_file(show)
 
     with open(show.file_name, 'r') as file:
-        print(show.file_name)
         matrix = json.load(file)
     return matrix
 
