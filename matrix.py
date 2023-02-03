@@ -1,6 +1,6 @@
 import json
 import os
-from tkinter import CENTER, Frame, Label
+from tkinter import CENTER, Frame
 from seats import Seat
 from movie import Show
 
@@ -16,11 +16,14 @@ def get_matrix(show:Show) -> list:
 
 def update_seat_matrix(show:Show) -> None:
     matrix = get_matrix(show)
+
     with open(show.file_name, 'w') as output:
+
         with open('selected_seats.json', 'r') as input:
             for seat in json.load(input):
                 row, column = seat
                 matrix[row][column] = 1
+
         json.dump(matrix, output)
 
 def create_matrix_file(show:Show) -> None:
@@ -44,6 +47,8 @@ def create_button_matrix(frame:Frame, show:Show) -> Frame:
 
             seat = Seat(button_frame, row, column, matrix[row][column])
             seat.grid(row=row, column=column)
+
     button_frame.grid(row=0, column=1)
     sub_frame.place(anchor=CENTER, relx=.5, rely=.5)
+
     return sub_frame

@@ -15,9 +15,9 @@ def submit(show:Show, username:str, frame:Frame):
         save_tickets_to_user(show, username, seats)
 
     _empty()
-    seat_strs = []
-    for seat in seats:
-        seat_strs.append(chr(65+seat[0])+str(seat[1]))
+
+    seat_strs = [chr(65+seat[0])+str(seat[1]) for seat in seats]
+
     text = f"""
     Username: {username}
     Movie name: {show.name}
@@ -26,11 +26,23 @@ def submit(show:Show, username:str, frame:Frame):
     Screen no: {show.screen_no}
     Seats: {','.join(seat_strs)}
     """
-    Label(frame, text=text, wraplength=300, bg='#333', fg='#FFF', font=('Calibri', 20, 'normal')).place(anchor=CENTER, relx=.5, rely=.5)
+    Label(
+        frame,
+        text=text,
+        wraplength=300,
+        bg='#333', fg='#FFF',
+        font=('Calibri', 20, 'normal')
+    ).place(anchor=CENTER, relx=.5, rely=.5)
 
     exit_button_frame = Frame(frame, bg='#333', pady=20)
     exit_button_frame.place(anchor=S, relx=.5, rely=.9)
-    Button(exit_button_frame, text="Exit", command=exit, bg='#FF3399', fg='#FFF').pack()
+    Button(
+        exit_button_frame,
+        text="Exit",
+        command=exit,
+        bg='#FF3399', fg='#FFF'
+    ).pack()
+
     frame.tkraise()
 
 def _empty() -> None:
