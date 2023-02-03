@@ -248,6 +248,64 @@
                         4
                     ]
                 ]
+            },
+            {
+                "show": {
+                    "name": "Varisu",
+                    "director": "Vamshi Paidipally",
+                    "imdb_rating": 6.8,
+                    "timing": "7:00PM",
+                    "screen_no": 4,
+                    "no_of_rows": 5,
+                    "no_of_columns": 7,
+                    "file_name": "varisu.json"
+                },
+                "seats": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        0
+                    ]
+                ]
+            },
+            {
+                "show": {
+                    "name": "Pathaan",
+                    "director": "Siddarth Anand",
+                    "imdb_rating": 7.5,
+                    "timing": "4:00PM",
+                    "screen_no": 3,
+                    "no_of_rows": 6,
+                    "no_of_columns": 5,
+                    "file_name": "pathaan.json"
+                },
+                "seats": [
+                    [
+                        1,
+                        0
+                    ]
+                ]
+            },
+            {
+                "show": {
+                    "name": "Pathaan",
+                    "director": "Siddarth Anand",
+                    "imdb_rating": 7.5,
+                    "timing": "4:00PM",
+                    "screen_no": 3,
+                    "no_of_rows": 6,
+                    "no_of_columns": 5,
+                    "file_name": "pathaan.json"
+                },
+                "seats": [
+                    [
+                        2,
+                        0
+                    ]
+                ]
             }
         ]
     },
@@ -431,6 +489,168 @@
                     [
                         1,
                         3
+                    ]
+                ]
+            }
+        ]
+    },
+    "ads": {
+        "name": "ads",
+        "history": [
+            {
+                "show": {
+                    "name": "Pathaan",
+                    "director": "Siddarth Anand",
+                    "imdb_rating": 7.5,
+                    "timing": "4:00PM",
+                    "screen_no": 3,
+                    "no_of_rows": 6,
+                    "no_of_columns": 5,
+                    "file_name": "pathaan.json"
+                },
+                "seats": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        2,
+                        1
+                    ]
+                ]
+            }
+        ]
+    },
+    "jack": {
+        "name": "jack",
+        "history": [
+            {
+                "show": {
+                    "name": "Kantara",
+                    "director": "Rishab Shetty",
+                    "imdb_rating": 8.4,
+                    "timing": "1:00PM",
+                    "screen_no": 1,
+                    "no_of_rows": 4,
+                    "no_of_columns": 6,
+                    "file_name": "kantara.json"
+                },
+                "seats": [
+                    [
+                        0,
+                        2
+                    ],
+                    [
+                        1,
+                        2
+                    ]
+                ]
+            }
+        ]
+    },
+    "felix": {
+        "name": "felix",
+        "history": [
+            {
+                "show": {
+                    "name": "Avatar",
+                    "director": "James Cameron",
+                    "imdb_rating": 7.8,
+                    "timing": "11:00PM",
+                    "screen_no": 4,
+                    "no_of_rows": 5,
+                    "no_of_columns": 5,
+                    "file_name": "avatar.json"
+                },
+                "seats": [
+                    [
+                        2,
+                        4
+                    ],
+                    [
+                        3,
+                        0
+                    ]
+                ]
+            }
+        ]
+    },
+    "jake sully": {
+        "name": "jake sully",
+        "history": [
+            {
+                "show": {
+                    "name": "Varisu",
+                    "director": "Vamshi Paidipally",
+                    "imdb_rating": 6.8,
+                    "timing": "7:00PM",
+                    "screen_no": 4,
+                    "no_of_rows": 5,
+                    "no_of_columns": 7,
+                    "file_name": "varisu.json"
+                },
+                "seats": [
+                    [
+                        0,
+                        2
+                    ],
+                    [
+                        0,
+                        3
+                    ]
+                ]
+            }
+        ]
+    },
+    "sanjay dutt": {
+        "name": "sanjay dutt",
+        "history": [
+            {
+                "show": {
+                    "name": "Pathaan",
+                    "director": "Siddarth Anand",
+                    "imdb_rating": 7.5,
+                    "timing": "4:00PM",
+                    "screen_no": 3,
+                    "no_of_rows": 6,
+                    "no_of_columns": 5,
+                    "file_name": "pathaan.json"
+                },
+                "seats": [
+                    [
+                        1,
+                        4
+                    ],
+                    [
+                        2,
+                        4
+                    ]
+                ]
+            }
+        ]
+    },
+    "Tom Riddle": {
+        "name": "Tom Riddle",
+        "history": [
+            {
+                "show": {
+                    "name": "Kantara",
+                    "director": "Rishab Shetty",
+                    "imdb_rating": 8.4,
+                    "timing": "1:00PM",
+                    "screen_no": 1,
+                    "no_of_rows": 4,
+                    "no_of_columns": 6,
+                    "file_name": "kantara.json"
+                },
+                "seats": [
+                    [
+                        0,
+                        1
+                    ],
+                    [
+                        1,
+                        1
                     ]
                 ]
             }

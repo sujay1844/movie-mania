@@ -1,9 +1,10 @@
 import json
+
 from matrix import update_seat_matrix
 from dataclasses import asdict
 from movie import Show
 from json.decoder import JSONDecodeError
-from tkinter import Button, Frame, Label
+from tkinter import CENTER, S, Button, Frame, Label
 from movie import Show
 
 def submit(show:Show, username:str, frame:Frame):
@@ -14,15 +15,22 @@ def submit(show:Show, username:str, frame:Frame):
         save_tickets_to_user(show, username, seats)
 
     _empty()
-    info = {
-        'name': username,
-        'show': asdict(show),
-        'seats': seats
+    seat_strs = []
+    for seat in seats:
+        seat_strs.append(chr(65+seat[0])+str(seat[1]))
+    text = f"""
+    Username: {username}
+    Movie name: {show.name}
+    IMDb Rating: {show.imdb_rating}
+    Timing: {show.timing}
+    Screen no: {show.screen_no}
+    Seats: {','.join(seat_strs)}
+    """
+    Label(frame, text=text, wraplength=300, bg='#333', fg='#FFF', font=('Calibri', 20, 'normal')).place(anchor=CENTER, relx=.5, rely=.5)
 
-    }
-    Label(frame, text=info, wraplength=300).pack()
-
-    Button(frame, text="Exit", command=exit).pack()
+    exit_button_frame = Frame(frame, bg='#333', pady=20)
+    exit_button_frame.place(anchor=S, relx=.5, rely=.9)
+    Button(exit_button_frame, text="Exit", command=exit, bg='#FF3399', fg='#FFF').pack()
     frame.tkraise()
 
 def _empty() -> None:

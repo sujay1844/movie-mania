@@ -32,7 +32,8 @@ class Seat(Button):
             text=self.text,
             font=('calibri', 10, 'bold'),
             bd='5',
-            bg='red' if status else 'white',
+            bg='grey' if status else '#FF3399',
+            fg='#FFF',
             command=self.book,
             padx=padding, pady=padding,
         )
@@ -51,7 +52,7 @@ class Seat(Button):
         coords = [self.row, self.column]
         if coords in selected_seats:
             selected_seats.remove(coords)
-            self.configure(bg='white')
+            self.configure(bg='#333')
         else:
             selected_seats.append(coords)
             self.configure(bg='green')

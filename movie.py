@@ -1,6 +1,5 @@
 import json
 from json.decoder import JSONDecodeError
-import os
 from dataclasses import dataclass, asdict
 
 @dataclass

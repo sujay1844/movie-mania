@@ -36,8 +36,8 @@ def create_matrix_file(show:Show) -> None:
 
 def create_button_matrix(frame:Frame, show:Show) -> Frame:
 
-    sub_frame = Frame(frame)
-    button_frame = Frame(sub_frame)
+    sub_frame = Frame(frame, bg='#333')
+    button_frame = Frame(sub_frame, bg='#333', pady=15)
     matrix = get_matrix(show)
     for row in range(show.no_of_rows):
         for column in range(show.no_of_columns):
